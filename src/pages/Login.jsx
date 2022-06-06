@@ -4,7 +4,7 @@ function Login() {
   return (
     <>
       <div>
-        <h1 className="text-indigo-600 font-black text-5xl text-center capitalize mr-6">Login and manage your <span className="text-black">patients</span></h1>
+        <h1 className="text-indigo-600 font-black text-5xl text-center capitalize mr-6">Login. and manage your <span className="text-black">patients</span></h1>
       </div>
       <div>
         <form action="post">
