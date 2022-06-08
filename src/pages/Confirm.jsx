@@ -7,7 +7,7 @@ function Confirm() {
   const params = useParams();
   const {token} = params;
   const url = `${import.meta.env.VITE_BACKEND_URL}/api/veterinaries/confirm-account/${token}`;
-
+  console.log("funciona")
   const [alert, setAlert] = useState({});
   const [confirmedAccount, setConfirmedAccount] = useState(false);
   const [loading, setLoading] = useState(true);
