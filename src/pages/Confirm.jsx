@@ -33,14 +33,9 @@ function Confirm() {
   }
 
   useEffect(() => {
-    
-    console.log("fuera run once")
-      return () => {
-      console.log("dentro run once")
       confirmAccount();
-    }
-    
-  }, [])
+      console.log("corre una vez")
+    }, [])
   
 
 
