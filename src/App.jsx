@@ -1,9 +1,9 @@
 import {Route, Routes, BrowserRouter} from "react-router-dom"
 import Authlayout from "./layout/Authlayout"
 import Confirm from "./pages/Confirm"
-import ForgetPassword from "./pages/ForgetPassword"
+import ForgotPassword from "./pages/ForgotPassword"
 import Login from "./pages/Login"
-import SignUp from "./pages/Register"
+import SignUp from "./pages/SignUp"
 
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
         <Route path="/" element={< Authlayout />}>
           <Route index element={ <Login /> } />
           <Route path="sign-up" element= {<SignUp />}/>
-          <Route path="forget-password" element= {<ForgetPassword />}/>
+          <Route path="forgot-password" element= {<ForgotPassword />}/>
           <Route path="confirm-account/:token" element= {<Confirm />}/>
         </Route>
       </Routes>
