@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {useParams, Link} from "react-router-dom"
-import Alert from '../components/Alert';
+import Alert from '../components/Alert.jsx';
 
 function Confirm() {
 
