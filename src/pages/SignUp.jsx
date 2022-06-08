@@ -31,7 +31,7 @@ function SignUp() {
 
     //Create the veterinary on the api
 
-    const url = "http://localhost:4000/api/veterinaries";
+    const url = `${import.meta.env.VITE_BACKEND_URL}/api/veterinaries`;
     try {
       const response = await fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
