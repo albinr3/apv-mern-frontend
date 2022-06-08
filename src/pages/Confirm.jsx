@@ -7,36 +7,39 @@ function Confirm() {
   const params = useParams();
   const {token} = params;
   const url = `${import.meta.env.VITE_BACKEND_URL}/api/veterinaries/confirm-account/${token}`;
-  console.log("funciona")
+
   const [alert, setAlert] = useState({});
   const [confirmedAccount, setConfirmedAccount] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const confirmAccount = async ()=> {
-      try {
-        
-        const response = await fetch(url);
-        const result = await response.json();
-        if (!response.ok){ //here we check if there is an error from the backend and we generate a new error with the message from backend
-          throw new Error(result.msg);
-        }
-        
-        //if everything is ok then
-        setConfirmedAccount(true)
-        setAlert({msg: result.msg, error1: false})
-        
-      } catch (error) {
-        setAlert({msg: error.message, error1: true}) //here we show the backend error on the frontend
+  const confirmAccount = async ()=> {
+    try {
+      
+      const response = await fetch(url);
+      const result = await response.json();
+      if (!response.ok){ //here we check if there is an error from the backend and we generate a new error with the message from backend
+        throw new Error(result.msg);
       }
-      //stop loading
-      setLoading(false);
+      
+      //if everything is ok then
+      setConfirmedAccount(true)
+      setAlert({msg: result.msg, error1: false})
+      
+    } catch (error) {
+      setAlert({msg: error.message, error1: true}) //here we show the backend error on the frontend
     }
+    //stop loading
+    setLoading(false);
+  }
+
+  useEffect(() => {
     
-    return () => {
-      console.log("this should be print once")
+    console.log("fuera run once")
+      return () => {
+      console.log("dentro run once")
       confirmAccount();
     }
+    
   }, [])
   
 
