@@ -33,8 +33,7 @@ function Confirm() {
   }
 
   useEffect(() => {
-      confirmAccount();
-      console.log("corre una vez")
+      confirmAccount(); //on localhost run twice, but in production run once(IDK why)
     }, [])
   
 
