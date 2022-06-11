@@ -8,6 +8,7 @@ export const AuthProvider = (props) => {
 
     const {children} = props;
     const [auth, setAuth] = useState({})
+    const [loading, setLoading] = useState(true)
     
     //here check and get the token from the localstorage and we get the data of the user and we storage it on the AuthState
     useEffect(() => {
@@ -16,6 +17,7 @@ export const AuthProvider = (props) => {
 
             //if the localstorage does not have any token, then stop the function
             if(!token){
+                setLoading(false);
                 return
             }
 
@@ -43,13 +45,24 @@ export const AuthProvider = (props) => {
                 console.log(error.message)
                 setAuth({})
               }
+
+              setLoading(false);
         }
         authenticateUser();
     }, [])
 
+    //function to log out from everywhere
+    const logOut = () => {
+      localStorage.removeItem("token");
+      setAuth({})
+    }
+
     return(
         <AuthContext.Provider value={{
-            auth, setAuth
+            auth, 
+            setAuth, 
+            loading, 
+            logOut
         }}>
 
             {children}
