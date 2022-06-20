@@ -6,6 +6,7 @@ import Login from "./pages/Login"
 import SignUp from "./pages/SignUp"
 import ResetPassword from "./pages/ResetPassword"
 import { AuthProvider } from "./context/AuthProvider"
+import { PatientsProvider } from "./context/PatientsProvider"
 import LoginLayout from "./layout/LoginLayout"
 import AdminPatients from "./pages/AdminPatients"
 
@@ -13,19 +14,21 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Routes>
-          <Route path="/" element={< Authlayout />}>
-            <Route index element={ <Login /> } />
-            <Route path="sign-up" element= {<SignUp />}/>
-            <Route path="forgot-password" element= {<ForgotPassword />}/>
-            <Route path="forgot-password/:token" element= {<ResetPassword />}/>
-            <Route path="confirm-account/:token" element= {<Confirm />}/>
-          </Route>
+        <PatientsProvider>
+          <Routes>
+            <Route path="/" element={< Authlayout />}>
+              <Route index element={ <Login /> } />
+              <Route path="sign-up" element= {<SignUp />}/>
+              <Route path="forgot-password" element= {<ForgotPassword />}/>
+              <Route path="forgot-password/:token" element= {<ResetPassword />}/>
+              <Route path="confirm-account/:token" element= {<Confirm />}/>
+            </Route>
 
-          <Route path="/admin" element={<LoginLayout />}>
-            <Route index element={<AdminPatients />} />
-          </Route>
-        </Routes>
+            <Route path="/admin" element={<LoginLayout />}>
+              <Route index element={<AdminPatients />} />
+            </Route>
+          </Routes>
+        </PatientsProvider>
       </AuthProvider>
     </BrowserRouter>
   )

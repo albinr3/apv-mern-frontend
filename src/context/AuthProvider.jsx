@@ -32,7 +32,7 @@ export const AuthProvider = (props) => {
                 });
           
                 const result = await response.json();
-                console.log(result)
+                
                 
                 if (!response.ok){ //here we check if there is an error from the backend and we generate a new error with the message from backend
                   throw new Error(result.msg);
