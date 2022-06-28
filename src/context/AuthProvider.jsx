@@ -57,12 +57,95 @@ export const AuthProvider = (props) => {
       setAuth({})
     }
 
+    //this function is used to edit the veterinary profile
+    const editProfile = async (data) => {
+        setAuth(data);
+        
+        const token = localStorage.getItem("token");
+        const url1 = `${url}/${data.profile._id}`
+        
+
+            //if the localstorage does not have any token, then stop the function
+            if(!token){
+                setLoading(false);
+                return
+            }
+
+            //here we fetch the url
+            try {
+                const response = await fetch(url1, {
+                  method: 'PUT', 
+                  headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization" : `Bearer ${token}`
+                  },
+                  body: JSON.stringify(data)
+                });
+          
+                const result = await response.json();
+                console.log(result)
+                
+                if (!response.ok){ //here we check if there is an error from the backend and we generate a new error with the message from backend
+                  throw new Error(result.msg);
+                }
+                
+                
+          
+              } catch (error) {
+                console.log(error.message)
+                
+              }
+
+    }
+
+    //this function is used to change your oLD password when you are logged in
+    const savePassword = async (data) => {
+      console.log(data)
+
+      const token = localStorage.getItem("token");
+        
+
+      //if the localstorage does not have any token, then stop the function
+      if(!token){
+        setLoading(false);
+        return
+      }
+
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/veterinaries/new-password`;
+
+      try {
+        const response = await fetch(url, {
+          method: 'PUT', 
+          headers: {
+            'Content-Type': 'application/json',
+            "Authorization" : `Bearer ${token}`
+          },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok){ //here we check if there is an error from the backend and we generate a new error with the message from backend
+          throw new Error(result.msg);
+        }
+
+        console.log(result)
+       
+        return {msg: result.msg} 
+
+      } catch (error) {
+        return {msg: error.message, error1: true}
+      }
+    }
+    
     return(
         <AuthContext.Provider value={{
             auth, 
             setAuth, 
             loading, 
-            logOut
+            logOut,
+            editProfile,
+            savePassword
         }}>
 
             {children}

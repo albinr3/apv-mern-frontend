@@ -15,7 +15,7 @@ function PatientList() {
           {patients.map(patient => (
             <Patient 
               key={patient._id}
-              patient={patient}
+              patientObj={patient}
             />
           ))}
         </>

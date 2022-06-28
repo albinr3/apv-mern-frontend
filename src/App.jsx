@@ -9,6 +9,8 @@ import { AuthProvider } from "./context/AuthProvider"
 import { PatientsProvider } from "./context/PatientsProvider"
 import LoginLayout from "./layout/LoginLayout"
 import AdminPatients from "./pages/AdminPatients"
+import Profile from "./pages/Profile"
+import ChangePass from "./pages/ChangePass"
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
 
             <Route path="/admin" element={<LoginLayout />}>
               <Route index element={<AdminPatients />} />
+              <Route path="profile" element= {<Profile />}/>
+              <Route path="change-password" element= {<ChangePass />}/>
             </Route>
           </Routes>
         </PatientsProvider>

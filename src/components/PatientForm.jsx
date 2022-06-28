@@ -1,4 +1,5 @@
 
+import { useEffect } from 'react';
 import { useState } from 'react'
 import usePatients from '../hooks/usePatients';
 import Alert from './Alert';
@@ -10,8 +11,22 @@ function PatientForm() {
   const [email, setEmail] = useState("");
   const [date, setDate] = useState("");
   const [symptoms, setSymptoms] = useState("");
+  const [id, setId] = useState(null);
 
-  const {savePatient, alert} = usePatients();
+  const {savePatient, alert,  patient} = usePatients();
+  
+
+  useEffect(() => {
+    if(patient?.name){
+        setName(patient.name)
+        setOwner(patient.owner)
+        setEmail(patient.email)
+        setDate(patient.date)
+        setSymptoms(patient.symptoms)
+        setId(patient._id)
+    }
+    
+  }, [patient])
   
   const [alert1, setAlert1] = useState({});
 
@@ -29,10 +44,23 @@ function PatientForm() {
       //if there is not error, empty the error message
       setAlert1({});
 
-      savePatient({email, owner, name, symptoms});
-      setAlert1(alert)
+      savePatient({email, owner, name, symptoms, id});
+    
+    if(id){
+        setAlert1({msg: "Patient Modified successfully", error1: false})
+    } else {
+        setAlert1({msg: "Patient created successfully", error1: false})
+    }
+    
+    setName("")
+    setOwner("")
+    setEmail("")
+    setDate("")
+    setSymptoms("")
+    setId(null)
+      
   }
-
+ 
   return (
     <>
     <h2 className="font-bold text-3xl text-center uppercase">Manage your patients</h2>
@@ -79,7 +107,7 @@ function PatientForm() {
             value={symptoms} onChange={e => setSymptoms(e.target.value)}/>
         </div>
         {msg && <Alert alert={alert1} />}
-        <input type="submit" value="Add Pattient" 
+        <input type="submit" value={id ? "Save Changes" : "Add Pattient"} 
         className='bg-indigo-600 text-white p-3 w-full uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors' />
 
     </form>

@@ -1,7 +1,9 @@
-import React from 'react'
+import usePatients from "../hooks/usePatients";
 
-function Patient({patient}) {
-  const {email, name, owner, symptoms, date, _id} = patient;
+function Patient({patientObj}) {
+  const {email, name, owner, symptoms, date, _id} = patientObj;
+
+  const {editPatient, deletePatient} = usePatients();
 
   const formatDate = (date) => {
     const newDate = new Date(date);
@@ -29,10 +31,10 @@ function Patient({patient}) {
         <span className='font-normal normal-case text-black'> {_id}</span></p>
 
         <div className='flex justify-between my-5'>
-            <button className='bg-indigo-600 text-white py-2 px-8 m-1 rounded-lg uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors'>
+            <button onClick={() => editPatient(patientObj)} className='bg-indigo-600 text-white py-2 px-8 m-1 rounded-lg uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors'>
                 Edit
             </button>
-            <button className='bg-red-600 text-white py-2 px-8 m-1 rounded-lg uppercase font-bold hover:bg-red-700 cursor-pointer transition-colors'>
+            <button onClick={() => deletePatient(_id)} className='bg-red-600 text-white py-2 px-8 m-1 rounded-lg uppercase font-bold hover:bg-red-700 cursor-pointer transition-colors'>
                 Delete
             </button>
         </div>
