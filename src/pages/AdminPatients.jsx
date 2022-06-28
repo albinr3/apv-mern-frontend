@@ -3,12 +3,18 @@ import { useState } from 'react'
 
 import PatientForm from '../components/PatientForm'
 import PatientList from '../components/PatientList'
+import usePatients from '../hooks/usePatients';
 
 
 
 function AdminPatients() {
 
   const [showForm, setShowForm] = useState(false);
+  const {loading} = usePatients();
+  console.log(loading)
+
+   //if is loading retrun loading, then render the page.
+   if(loading) return "Loading...."
 
   return (
     <div className='flex flex-col md:flex-row'>
@@ -21,7 +27,8 @@ function AdminPatients() {
       </div>
 
       <div className='md:w-1/2 lg:w-3/5'>
-        <PatientList />
+        {loading ? "Loading...." : <PatientList />}
+        
       </div>
     </div>
   )

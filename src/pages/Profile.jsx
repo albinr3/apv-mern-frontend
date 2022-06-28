@@ -14,7 +14,7 @@ function Profile() {
 
     useEffect( () => {
         setProfile(auth.profile)
-    }, [auth.profile]);
+    }, []);
 
     const {email, tel, web, name} = profile;
    

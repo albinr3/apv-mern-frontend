@@ -65,7 +65,7 @@ function Login() {
 
       //we go to the admin page after login
       navigate("/admin");
-      window.location.reload(false);
+      //window.location.reload(false);
 
     } catch (error) {
       setAlert({msg: error.message, error1: true}) //here we show the backend error on the frontend

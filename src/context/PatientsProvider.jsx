@@ -6,6 +6,7 @@ export const PatientsProvider = (props) => {
     const {children} = props;
     const [alert, setAlert] = useState({})
     const [patients, setPatients] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [patient, setPatient] = useState({});
 
     //get the patients from the database
@@ -34,12 +35,14 @@ export const PatientsProvider = (props) => {
                 const {createdAt, __v, updatedAt, ...savedPatient} = result; //this create a new object deleting this propieties
 
                 setPatients(result)
-                
+                setLoading(false);
                 
         
                 } catch (error) {
+                setLoading(false)
                 setAlert({msg: error.message, error1: true}) //here we show the backend error on the frontend
                 console.log(error)
+                
                 }
         }
         
@@ -53,7 +56,7 @@ export const PatientsProvider = (props) => {
 
         const token = localStorage.getItem("token");
 
-        //check if we are givind the id, if we are givind the id, it mean that we are editing a patient
+        //check if we are giving the id, if we are giving the id, it mean that we are editing a patient
         if(patient.id) {
             try {
                 const response = await fetch(`${url}/${patient.id}`, {
@@ -166,7 +169,7 @@ export const PatientsProvider = (props) => {
     return (
         <PatientContext.Provider 
         value={{
-            patients, savePatient, editPatient, patient, deletePatient
+            patients, savePatient, editPatient, patient, deletePatient, loading
         }}>
             {children}
         </PatientContext.Provider>    

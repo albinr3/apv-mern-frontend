@@ -49,7 +49,7 @@ export const AuthProvider = (props) => {
               setLoading(false);
         }
         authenticateUser();
-    }, [])
+    }, [auth])
 
     //function to log out from everywhere
     const logOut = () => {

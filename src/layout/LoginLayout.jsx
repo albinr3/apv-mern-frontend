@@ -9,7 +9,7 @@ function LoginLayout() {
     const {auth, loading} = useAuth()
    
     //if is loading retrun loading, then render the page.
-    if(loading) return "Loading...."
+    if(loading) return "Loading....."
 
     return (
         <>
