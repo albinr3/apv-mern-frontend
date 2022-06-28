@@ -13,9 +13,7 @@ function AdminPatients() {
   const {loading} = usePatients();
   console.log(loading)
 
-   //if is loading retrun loading, then render the page.
-   if(loading) return "Loading...."
-
+   
   return (
     <div className='flex flex-col md:flex-row'>
       <button onClick={()=> setShowForm(!showForm)}
@@ -27,8 +25,7 @@ function AdminPatients() {
       </div>
 
       <div className='md:w-1/2 lg:w-3/5'>
-        {loading ? "Loading...." : <PatientList />}
-        
+        <PatientList />
       </div>
     </div>
   )
