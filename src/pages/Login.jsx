@@ -4,12 +4,15 @@ import { useState, useEffect } from "react";
 import Alert from "../components/Alert";
 
 import useAuth from "../hooks/useAuth";
+import usePatients from "../hooks/usePatients";
 
 
 function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const {setTokenState} = usePatients();
 
   const [alert, setAlert] = useState({});
 
@@ -59,6 +62,7 @@ function Login() {
       //if everything is ok then
       setAlert({msg: "Password is correct, log in", error1: false})
       localStorage.setItem("token", result.profile.token);
+      setTokenState(result.profile.token);
 
       //here we pass the veterinary info direct to the auth
       setAuth(result);

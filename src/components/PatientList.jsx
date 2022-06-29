@@ -5,9 +5,9 @@ import Patient from "./Patient";
 
 function PatientList() {
 
-  const {patients, loading} = usePatients();
+  const {patients} = usePatients();
 
-  if(loading) return "Loading...."
+  
   return (
     <>
       {patients.length ? (

@@ -10,8 +10,6 @@ import usePatients from '../hooks/usePatients';
 function AdminPatients() {
 
   const [showForm, setShowForm] = useState(false);
-  const {loading} = usePatients();
-  console.log(loading)
 
    
   return (

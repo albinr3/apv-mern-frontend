@@ -8,6 +8,7 @@ export const PatientsProvider = (props) => {
     const [patients, setPatients] = useState([]);
     const [loading, setLoading] = useState(true);
     const [patient, setPatient] = useState({});
+    const [tokenState, setTokenState] = useState("");
 
     //get the patients from the database
     useEffect( () => {
@@ -35,11 +36,11 @@ export const PatientsProvider = (props) => {
                 const {createdAt, __v, updatedAt, ...savedPatient} = result; //this create a new object deleting this propieties
 
                 setPatients(result)
-                setLoading(false);
+                
                 
         
                 } catch (error) {
-                setLoading(false)
+               
                 setAlert({msg: error.message, error1: true}) //here we show the backend error on the frontend
                 console.log(error)
                 
@@ -47,7 +48,7 @@ export const PatientsProvider = (props) => {
         }
         
         getPatients();
-    }, [])
+    }, [tokenState])
 
     const savePatient = async (patient) => {
 
@@ -169,7 +170,7 @@ export const PatientsProvider = (props) => {
     return (
         <PatientContext.Provider 
         value={{
-            patients, savePatient, editPatient, patient, deletePatient, loading
+            patients, savePatient, editPatient, patient, deletePatient, loading, setTokenState
         }}>
             {children}
         </PatientContext.Provider>    
